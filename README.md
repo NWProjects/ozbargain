@@ -26,13 +26,14 @@ $ npm run dev
 http://localhost:9090/deals
 ```
 - Add in-app screenshots.
-![screenshot of my project]()
+![screenshot of my project](https://github.com/NWProjects/ozbargain/blob/main/sample/home.png)
+![screenshot of my project](https://github.com/NWProjects/ozbargain/blob/main/sample/detail.png)
 
 ## :pencil2: Planning & Problem Solving
 - Talk about approach to the problem.
 - Add screenshots/drawings of doodles/plans during the planning phase.
 - Flow charts of app logic.
-![Wireframing]()
+![Wireframing](https://github.com/NWProjects/ozbargain/blob/main/sample/wireframe.jpg)
 
 ## :rocket: Cool tech
 - Programming languages
