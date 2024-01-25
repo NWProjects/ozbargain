@@ -1,0 +1,38 @@
+<h1>Edit current deal</h1>
+
+<form action="/deals/<%= deal.id %>?_method=put" method="post">
+    <label for="">title (product name + model):</label><br>
+    <input type="text" name="title" value="<%= deal.title %>"><br>
+
+    <label for="">merchant: </label><br>
+    <input type="text" name="merchant" value="<%= deal.merchant %>"><br>
+
+    <label for="">original price:</label><br>
+    <input type="text" name="original_price" value="<%= deal.original_price %>"><br>
+
+    <label for="">sale price:</label><br>
+    <input type="text" name="sale_price" value="<%= deal.deal_price %>"><br>
+
+    <label for="">coupon:</label><br>
+    <input type="text" name="coupon" value="<%= deal.coupon %>"><br>
+
+    <label for="">link:</label><br>
+    <input type="text" name="url" value="<%= deal.url %>"><br>
+
+    <label for="">image:</label><br>
+    <input type="text" name="image_url" value="<%= deal.image_url %>"><br>
+
+    <label for="">start date (e.g. 2024-12-30):</label><br>
+    <input type="text" name="start_date" value="<%= deal.start_date %>"><br>
+
+    <label for="">end date (e.g. 2024-12-30):</label><br>
+    <input type="text" name="end_date" value="<%= deal.end_date %>"><br>
+
+    <label for="">category:</label><br>
+    <input type="text" name="category" value="<%= deal.category %>"><br>
+
+    <label for="">description:</label><br>
+    <textarea name="description"><%= deal.description %></textarea><br>
+    
+    <button>update</button>
+</form>

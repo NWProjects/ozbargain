@@ -1,3 +1,60 @@
 img{
     width:200px;
+    height:200px;
+    object-fit: contain;
+}
+
+div{
+    margin-top: 20px;
+}
+
+.products-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem; 
+    font-size: medium;
+}
+
+.product{
+    width: 200px; 
+    height: 200px;
+    margin: 30px; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+    border: 1px solid #ddd; 
+    text-align: center; 
+}
+
+.price{
+    text-align: center; 
+    padding-top: 5px;
+}
+
+.sale-price {
+    color: #cd6702; 
+    font-size: 1.5em; 
+    font-weight: bold; 
+}
+
+.original-price {
+    font-size: 0.9em; 
+    text-decoration: line-through; 
+    color: grey; 
+}
+
+.save-amount {
+    background-color: #cd6702; 
+    color: white; 
+    font-size: 0.85em; 
+    padding: 4px 10px; 
+    border-radius: 3px; 
+    display: inline-block; 
+}
+
+.share-container{
+    background-color: #cd6702; 
+    color: white; 
+    font-size: 1em; 
+    padding: 4px 10px; 
+    border-radius: 3px; 
+    display: inline-block; 
 }

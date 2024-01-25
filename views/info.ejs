@@ -1,0 +1,29 @@
+<h1>Deal details</h1>
+
+<p>title: <%= deal.title%></p>
+
+<p>category: <%= deal.category%></p>
+
+<p>start date: <%= deal.start_date%></p>
+
+<p>end date: <%= deal.end_date%></p>
+
+<p>merchant: <%= deal.merchant%></p>
+
+<a href="<%= deal.url%>"><%= deal.url%></a>
+
+<p>original price: <%= deal.original_price%></p>
+
+<p>deal price: <%= deal.deal_price%></p>
+
+<p>coupon: <%= deal.coupon%></p>
+
+<img src="<%= deal.image_url%>" alt="">
+
+<p>description: <%= deal.description%>/p>
+
+<form action="/deals/<%= deal.id %>?_method=delete" method="post">
+    <button>delete</button>
+</form>
+<br>
+<a href="/deals/<%= deal.id %>/edit">edit</a>
