@@ -48,7 +48,8 @@ app.post('/deals', (req, res) => {
     let category = req.body.category
     let description = req.body.description
 
-    const sql = `insert into deals 
+    const sql = `
+    insert into deals 
     (title, merchant, original_price, sale_price, coupon, url, image_url, start_date, end_date, category, description) 
     values 
     ('${title}', '${merchant}', '${originalPrice}', '${salePrice}', '${coupon}', '${url}', '${imageUrl}', '${startDate}', '${endDate}', '${category}', '${description}');`
@@ -90,22 +91,58 @@ app.delete('/deals/:id', (req, res)=>{
 })
 
 app.put('/deals/:id', (req, res) => {
+    let title = req.body.title;
+    let merchant = req.body.merchant;
+    let originalPrice = parseFloat(req.body.original_price);
+    let salePrice = parseFloat(req.body.sale_price);
+    let coupon = req.body.coupon;
+    let url = req.body.url;
+    let imageUrl = req.body.image_url;
+    let startDate = req.body.start_date;
+    let endDate = req.body.end_date;
+    let category = req.body.category;
+    let description = req.body.description; 
 
     const sql = `
-      SELECT * FROM deals
-      WHERE id = $1;
-    `
-  
-    db.query(sql, [req.params.id], (err, result) => {
-      if (err) {
-        console.log(err)
-      }
-  
-      let deal = result.rows[0]
-      res.render('edit_deal_form', {deal:deal})
-      
+        UPDATE deals
+        SET 
+            title = $1, 
+            merchant = $2, 
+            original_price = $3, 
+            sale_price = $4, 
+            coupon = $5, 
+            url = $6, 
+            image_url = $7, 
+            start_date = $8, 
+            end_date = $9,
+            category = $10,
+            description = $11
+        WHERE id = $12;
+    `;
+
+    const values = [title, merchant, originalPrice, salePrice, coupon, url, imageUrl, startDate, endDate, category, description, req.params.id];
+
+    db.query(sql, values, (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.redirect(`/deals/${req.params.id}`);
+        }
+    });
+});
+
+
+app.get('/deals/:id/edit', (req,res) =>{
+    let id = req.params.id
+    db.query(`select * from deals where id = ${id};`, (err, result) => {
+        if(err){
+            console.log(err);
+        }
+        let deal = result.rows[0]
+
+        res.render('edit_deal_form', {deal:deal})
     })
-  })
+})
 
 app.listen(port, () => {
     console.log(`listening on port ${port}`);

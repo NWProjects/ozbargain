@@ -4,6 +4,10 @@ img{
     object-fit: contain;
 }
 
+h1{
+    color: #cd6702; 
+}
+
 div{
     margin-top: 20px;
 }
