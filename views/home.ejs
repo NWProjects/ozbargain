@@ -1,0 +1,26 @@
+<br>
+<h1>Hot Deals</h1>
+
+<div class="products-container">
+    <% for (let deal of deals) { %>
+        <div class="products">
+            <div class="product">
+                <img src="<%= deal.image_url %>" alt="<%= deal.title %>">
+            </div>
+            <div class="price">
+                <p>
+                    <a href="/deals/<%= deal.id %>"><%= deal.title %></a>
+                </p>
+                <div class="sale-price">
+                    $<%= deal.sale_price%><br>
+                </div>
+                <div class="original-price">
+                    $<%= deal.original_price%><br>
+                </div>
+                <div class="save-amount">
+                    Save $<%= (deal.original_price - deal.sale_price)%>
+                </div>
+            </div>
+        </div>
+    <% } %>
+</div>

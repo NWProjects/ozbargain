@@ -27,3 +27,9 @@ Try your luck to see if JB/OW will price match and stack whatever gift cards you
 
 INSERT INTO deals (title, original_price, sale_price, merchant, coupon, url, image_url, start_date, end_date, category, description)
 VALUES ('GAMING PC: INTEL CORE I9-14900KF RTX 4090 24GB DDR5 DESKTOP - FEB', 5099, 4599, 'TechFast', '14900KF-4090-FEB', 'https://www.techfast.com.au/products/Gaming-PC-Intel-Core-i9-14900KF-RTX-4090-24GB-DDR5-Desktop-JAN', 'https://www.techfast.com.au/assets/images/configs/454.png', '2024-01-23', '2024-01-30', 'Computing', 'Howdy Legends, We are getting in early on the Feb deals and have a few different configs up for grabs. This time we are in the mid to high tier neck of the woods. Bringing back these popular beastly i9 & AM5 X3D 4090 systems. We have secured stock to finalize any pre-existing with a bit extra on top for these deals. Return of the Classic RTX 3080 Paired with the 5700X for a nice budget high tier build. And a cutla budget bad boys, sporting the RTX 4060 paired with either the i5-12400F or the R5 5500. We are pretty much through the BD/January orders as of now, and for anything outstanding from early JAN/BD, we have sent an update via email. Intel Core i9 14900KF | RTX 4090 Gaming PC(techfast.com.au): $4399 after 14900KF-4090-FEB Intel Core i9 14900KF processor RTX 4090 (PNY Mainly) 360mm Liquid Cooler (primarily Antec Vortex in use) ASRock Z790 Lightning WiFi 32GB 5200MHz RAM (Kingston Mainly) 1TB Gen 4 NVMe SSD (ADATA and Kingston in use) 850W 80 Plus Gold PSU Antec P20C case.');
+
+CREATE TABLE users (
+    id serial primary key,
+    email text,
+    password_digest text
+);

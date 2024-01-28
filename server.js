@@ -1,22 +1,42 @@
 require('dotenv').config()
 const express = require('express')
+const bcrypt = require('bcrypt')
 const app = express()
 const port = 9090
 const expressLayouts = require('express-ejs-layouts')
 const logger = require('./middlewares/logger')
 const methodOverride = require('method-override')
 const db = require('./db')
+const session = require('express-session')
+const setCurrentUser = require('./middlewares/set_current_user')
+
 
 app.set('view engine', 'ejs')
 
 app.use(express.static('public'))
 app.use(methodOverride('_method'))
 app.use(logger)
+app.use(session({
+    secret:'mistyrose', 
+    resave: false,
+    saveUninitialized: true
+}))
+app.use(setCurrentUser)
 app.use(expressLayouts)
 app.use(express.urlencoded({extended: true}))
 
-app.get('/', (req, res) => {
-    res.send('hello')
+
+app.get('/', (req,res) => {
+    console.log(req.session.userId);
+    db.query('select * from deals;', (err, result) => {
+        if(err){
+            console.log(err);
+        }
+
+        let deals = result.rows
+
+        res.render('home', {deals: deals})
+    })
 })
 
 app.get('/deals', (req,res) => {
@@ -52,9 +72,9 @@ app.post('/deals', (req, res) => {
     insert into deals 
     (title, merchant, original_price, sale_price, coupon, url, image_url, start_date, end_date, category, description) 
     values 
-    ('${title}', '${merchant}', '${originalPrice}', '${salePrice}', '${coupon}', '${url}', '${imageUrl}', '${startDate}', '${endDate}', '${category}', '${description}');`
+    ($1, $2, $3, $4, $5, $6, $7,$8,$9, $10, $11);`
     
-    db.query(sql, (err,result) => {
+    db.query(sql,[title, merchant, originalPrice, salePrice, coupon, url, imageUrl, startDate, endDate, category, description], (err,result) => {
         if(err){
             console.log(err);
         }
@@ -142,6 +162,52 @@ app.get('/deals/:id/edit', (req,res) =>{
 
         res.render('edit_deal_form', {deal:deal})
     })
+})
+
+app.get('/login', (req, res) =>{
+    res.render('login')
+})
+
+app.post('/login', (req,res) =>{
+    const sql = `
+        select * from users 
+        where email = '${req.body.email}'
+    `
+    db.query(sql, (err, result) => {
+        //check user exist in database
+        if(err){
+            console.log(err);
+            res.render('login')
+            return
+        } 
+
+        if(result.rows.length === 0){
+            console.log('user not fonud');
+            res.render('login')
+            return
+        }
+        
+        //check password
+        const plaintextPass = req.body.password
+
+        const hashedPass = result.rows[0].password_digest
+        bcrypt.compare(plaintextPass, hashedPass, (err,isCorrect) =>{
+            if(!isCorrect){
+                console.log('password not match');
+                res.render('login')
+                return
+            }
+
+            req.session.userId = result.rows[0].id
+            res.redirect('/')
+        })
+
+    })
+})
+
+app.delete('/logout', (req, res) => {
+    req.session.userId = null
+    res.redirect('/login')
 })
 
 app.listen(port, () => {
