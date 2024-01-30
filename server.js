@@ -17,7 +17,7 @@ app.use(express.static('public'))
 app.use(methodOverride('_method'))
 app.use(logger)
 app.use(session({
-    secret:'mistyrose', 
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true
 }))
